@@ -207,7 +207,7 @@ with tab1:
     
     with col1:
         # 目標語言輸入
-        target_language = st.text_input("目標語言", value="泰語", help="輸入您想要分析的語言，例如：英語、日語、西班牙語等")
+        target_language = st.text_input("目標語言", value="", help="輸入您想要分析的語言，例如：英語、日語、西班牙語等")
     
     with col2:
         # 客群描述輸入
