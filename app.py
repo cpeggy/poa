@@ -27,13 +27,18 @@ st.markdown("""
 """)
 
 # 從 .env 檔案中獲取 API 金鑰和搜尋引擎 ID (sidebar)
+# 只輸入一次 API 金鑰並設定到兩個 API
 with st.sidebar:
     st.header("API 設定")
     
-    # 獲取環境變量或讓用戶輸入
-    google_api_key = st.text_input("Google API Key", value=os.getenv("GOOGLE_API_KEY", ""), type="password")
+    # 輸入一次 API 金鑰
+    api_key = st.text_input("API Key", value=os.getenv("API_KEY", ""), type="password")
+    
+    # 設置 Google 和 Gemini API 金鑰
+    google_api_key = api_key
+    gemini_api_key = api_key
+    
     google_cx = st.text_input("Google Custom Search ID", value=os.getenv("GOOGLE_CX", ""), type="password")
-    gemini_api_key = st.text_input("Gemini API Key", value=os.getenv("GEMINI_API_KEY", ""), type="password")
     
     st.markdown("---")
     
@@ -151,7 +156,7 @@ def process_batch_dialogue(dialogues, target_language, categories, delimiter="--
 
         try:
             # 使用正確的方式創建和調用 Gemini API
-            model = genai.GenerativeModel('gemini-1.5-flash-8b')
+            model = genai.GenerativeModel('gemini-2.0-flash')
             response = model.generate_content(content)
             response_text = response.text
             
